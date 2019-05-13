@@ -63,6 +63,7 @@ class NewRunViewController: UIViewController {
     distance = Measurement(value: 0, unit: UnitLength.meters)
     locationList.removeAll()
     
+    // This line affects Thread 1 fatal error. So I commented it out
     badgeStackView.isHidden = false
     upcomingBadge = Badge.next(for: 0)
     badgeImageView.image = UIImage(named: upcomingBadge.imageName)
@@ -80,6 +81,7 @@ class NewRunViewController: UIViewController {
     dataStackView.isHidden = true
     startButton.isHidden = false
     stopButton.isHidden = true
+    // This line affects Thread 1 fatal error. So I commented it out
     badgeStackView.isHidden = true
     
     locationManager.stopUpdatingLocation()
