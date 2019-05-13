@@ -218,6 +218,7 @@
                     <connections>
                         <outlet property="badgeImageView" destination="m4G-79-UJy" id="AZD-IJ-bb1"/>
                         <outlet property="badgeInfoLabel" destination="jLe-8M-qkd" id="bpd-vX-bXX"/>
+                        <outlet property="badgeStackView" destination="bFa-UF-uXD" id="YSD-Jj-Mkr"/>
                         <outlet property="dataStackView" destination="sP3-YI-w8v" id="Eb8-4V-YAC"/>
                         <outlet property="distanceLabel" destination="Gp7-dS-cbT" id="S8x-2t-Gc6"/>
                         <outlet property="launchPromptStackView" destination="TEI-Oa-26B" id="Ir8-bm-Xdv"/>
@@ -246,6 +247,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YrF-7l-JRe">
+                                <rect key="frame" x="16" y="167" width="343" height="333"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eQq-kW-TKO">
                                 <rect key="frame" x="16" y="405.5" width="343" height="156"/>
                                 <subviews>
@@ -291,27 +296,42 @@
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ct-Qx-n2T">
                                 <rect key="frame" x="277" y="303" width="60" height="60"/>
                                 <state key="normal" image="info"/>
+                                <connections>
+                                    <action selector="infoButtonTapped" destination="edy-es-7gn" eventType="touchUpInside" id="IHq-X8-AaJ"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k90-l2-1jf">
                                 <rect key="frame" x="67" y="168" width="240" height="128"/>
                             </imageView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YrF-7l-JRe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="333"/>
-                            </mapView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0VL-EA-IK3">
+                                <rect key="frame" x="302" y="628" width="51" height="31"/>
+                                <connections>
+                                    <action selector="displayModeToggled:" destination="edy-es-7gn" eventType="valueChanged" id="AH7-gh-Tjm"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SPACEMODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYx-bR-b9Q">
+                                <rect key="frame" x="193" y="633.5" width="101" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eQq-kW-TKO" firstAttribute="leading" secondItem="02b-8x-I0v" secondAttribute="leadingMargin" id="57q-Fr-gcB"/>
+                            <constraint firstItem="0VL-EA-IK3" firstAttribute="centerY" secondItem="mYx-bR-b9Q" secondAttribute="centerY" id="8yM-oQ-OmY"/>
                             <constraint firstItem="0ct-Qx-n2T" firstAttribute="trailing" secondItem="k90-l2-1jf" secondAttribute="trailing" constant="-8" id="9K3-yG-fpn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eQq-kW-TKO" secondAttribute="trailing" id="MgU-zy-WpV"/>
-                            <constraint firstItem="k90-l2-1jf" firstAttribute="bottom" secondItem="YrF-7l-JRe" secondAttribute="bottom" id="nXE-fT-cuV"/>
-                            <constraint firstItem="k90-l2-1jf" firstAttribute="leading" secondItem="YrF-7l-JRe" secondAttribute="leading" id="o9j-JP-Gnt"/>
-                            <constraint firstItem="k90-l2-1jf" firstAttribute="trailing" secondItem="YrF-7l-JRe" secondAttribute="trailing" id="q3g-WQ-0sP"/>
+                            <constraint firstItem="DiD-yF-DJb" firstAttribute="top" secondItem="0VL-EA-IK3" secondAttribute="bottom" constant="8" id="eTi-9G-h6j"/>
+                            <constraint firstItem="0VL-EA-IK3" firstAttribute="leading" secondItem="mYx-bR-b9Q" secondAttribute="trailing" constant="8" id="pqz-MD-TTY"/>
                             <constraint firstItem="0ct-Qx-n2T" firstAttribute="bottom" secondItem="k90-l2-1jf" secondAttribute="bottom" constant="-8" id="qwK-Bf-ykN"/>
-                            <constraint firstItem="k90-l2-1jf" firstAttribute="top" secondItem="YrF-7l-JRe" secondAttribute="top" id="uOA-kQ-wRj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0VL-EA-IK3" secondAttribute="trailing" constant="8" id="wEb-Rr-Lon"/>
+                            <constraint firstItem="0VL-EA-IK3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eQq-kW-TKO" secondAttribute="bottom" constant="8" id="x9b-Rv-i4b"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="badgeImageView" destination="k90-l2-1jf" id="4Wl-3t-KMh"/>
+                        <outlet property="badgeInfoButton" destination="0ct-Qx-n2T" id="b53-TV-oUs"/>
                         <outlet property="dateLabel" destination="sAJ-v7-yGx" id="aTy-VQ-igK"/>
                         <outlet property="distanceLabel" destination="f8d-ls-rzA" id="tZJ-GU-F3O"/>
                         <outlet property="mapView" destination="jNH-dz-PwR" id="tCV-22-IMQ"/>
