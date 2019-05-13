@@ -2,12 +2,16 @@ import UIKit
 import MapKit
 
 class RunDetailsViewController: UIViewController {
-  
+
+  // Outlets
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var paceLabel: UILabel!
+  
+  @IBOutlet weak var badgeImageView: UIImageView!
+  @IBOutlet weak var badgeInfoButton: UIButton!
   
   // Properties
   var run: Run!
@@ -34,6 +38,9 @@ class RunDetailsViewController: UIViewController {
     timeLabel.text = "Time:  \(formattedTime)"
     paceLabel.text = "Pace:  \(formattedPace)"
     loadMap()
+    
+    let badge = Badge.best(for: run.distance)
+    badgeImageView.image = UIImage(named: badge.imageName)
   }
   
   private func mapRegion() -> MKCoordinateRegion? {
@@ -155,6 +162,27 @@ class RunDetailsViewController: UIViewController {
     }
     
     return UIColor(red: red, green: green, blue: blue, alpha: 1)
+  }
+  
+  // IBActions
+  
+  // Action for switcher
+  @IBAction func displayModeToggled(_ sender: UISwitch) {
+    UIView.animate(withDuration: 0.2) {
+      self.badgeImageView.alpha = sender.isOn ? 1 : 0
+      self.badgeInfoButton.alpha = sender.isOn ? 1 : 0
+      self.mapView.alpha = sender.isOn ? 0 : 1
+    }
+  }
+  
+  // Action for infoButton
+  @IBAction func infoButtonTapped() {
+    let badge = Badge.best(for: run.distance)
+    let alert = UIAlertController(title: badge.name,
+                                  message: badge.information,
+                                  preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+    present(alert, animated: true)
   }
   
 } // End of class
